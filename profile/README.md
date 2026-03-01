@@ -11,6 +11,13 @@ x3s.host runs a stability-first hosting platform for agent containers using a sp
 - Platform: [`x3s-host/x3s`](https://github.com/x3s-host/x3s)
 - Org profile/docs: [`x3s-host/.github`](https://github.com/x3s-host/.github)
 
+## React Doctor Score (`x3s-host/x3s`)
+
+- **Latest score:** **92 / 100** (`Great`)
+- **Warnings:** 339 across 278/283 files
+- **Last checked:** 2026-03-01
+- **Command:** `npx -y react-doctor@latest . --verbose`
+
 ## Architecture Snapshot
 
 - **Control Plane (Coolify host)**
