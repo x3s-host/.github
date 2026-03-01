@@ -1,35 +1,42 @@
 # x3s.host
 
+[![Build and Push Images](https://github.com/x3s-host/x3s/actions/workflows/build-and-push-images.yml/badge.svg)](https://github.com/x3s-host/x3s/actions/workflows/build-and-push-images.yml)
+
 Sovereign hosting for AI agent runtimes.
 
-x3s.host provides managed deployment and operations for agent containers with a control-plane + worker architecture, runtime isolation, and image-based production releases.
+x3s.host runs a stability-first hosting platform for agent containers using a split control-plane/runtime architecture and image-based production deployments.
 
-## What We Operate
+## Repositories
 
-- Control plane: Coolify orchestration and proxy management
-- Runtime workers: app and tenant workload execution
-- CI build plane: GitHub Actions builds and publishes Docker images to GHCR
+- Platform: [`x3s-host/x3s`](https://github.com/x3s-host/x3s)
+- Org profile/docs: [`x3s-host/.github`](https://github.com/x3s-host/.github)
 
-## Platform Principles
+## Architecture Snapshot
 
-- Stability first: keep control-plane hosts out of workload scheduling
-- Image-only production deploys: avoid host-side source builds for core services
-- Region-aware placement: strict infra policy and health-based server selection
-- Security by default: secret hygiene, scoped credentials, and explicit preflight checks
+- **Control Plane (Coolify host)**
+  - Coolify orchestration
+  - `coolify-proxy` / Traefik
+  - No tenant workloads
 
-## Core Repository
+- **Runtime Plane (worker hosts)**
+  - x3s backend/frontend runtime containers
+  - Tenant runtime containers
+  - Deployment destinations in Coolify
 
-- Product repo: [`x3s-host/x3s`](https://github.com/x3s-host/x3s)
+- **Build Plane (CI)**
+  - GitHub Actions builds Docker images
+  - Images published to GHCR
+  - Coolify deploys pinned image tags
 
-## Release Flow
+## Release Workflow
 
-1. Merge to `main`
-2. GitHub Actions builds and pushes backend/frontend images to GHCR
-3. Promote tag-pinned image refs into deploy env
-4. Run deployment preflight and infra role audits
-5. Deploy through Coolify to runtime worker destinations
+1. Merge to `main` in `x3s-host/x3s`.
+2. GitHub Actions builds and pushes backend/frontend images.
+3. Promote tag-pinned refs into deploy env.
+4. Run preflight + role audit checks.
+5. Deploy through Coolify to runtime destinations.
 
-## Operations Commands (from `x3s` repo)
+## Operator Commands (from `x3s` repo)
 
 ```bash
 ./scripts/infra-role-audit.sh
@@ -37,19 +44,15 @@ x3s.host provides managed deployment and operations for agent containers with a 
 ./scripts/promote-release-images.sh <tag>
 ```
 
-## Architecture (Current)
+## Operational Rules
 
-- **Control host role:** `control`
-- **Worker host role:** `runtime` (or `hybrid` when explicitly intended)
-- Placement excludes control-plane hosts for runtime deployments.
+- Control-plane servers are `control` role only.
+- Runtime scheduling is limited to `runtime` / `hybrid` roles.
+- Production deploys are image-based for core services.
+- Secrets are never committed; rotate immediately if exposed.
 
-## Security Notes
+## Links
 
-- Never commit live secrets
-- Use test keys in non-production environments
-- Rotate credentials immediately on exposure
-
-## Contact
-
-- Support: `support@x3s.host`
-- Website: `https://x3s.host`
+- Website: https://x3s.host
+- Support: support@x3s.host
+- Org: https://github.com/x3s-host
