@@ -19,6 +19,16 @@ x3s.host runs a stability-first hosting platform for agent containers using a sp
 - **Last checked:** 2026-03-01
 - **Command:** `npx -y react-doctor@latest . --verbose`
 
+
+## Agent Image Repositories
+
+- [`x3s-host/agent-openclaw`](https://github.com/x3s-host/agent-openclaw)
+- [`x3s-host/agent-openfang`](https://github.com/x3s-host/agent-openfang)
+- [`x3s-host/agent-moltis`](https://github.com/x3s-host/agent-moltis)
+- [`x3s-host/agent-zeroclaw`](https://github.com/x3s-host/agent-zeroclaw)
+
+Each repo includes a `Build and Push Image` workflow that publishes to GHCR on `main` and version tags.
+
 ## Architecture Snapshot
 
 - **Control Plane (Coolify host)**
