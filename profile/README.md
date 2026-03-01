@@ -1,6 +1,7 @@
 # x3s.host
 
 [![Build and Push Images](https://github.com/x3s-host/x3s/actions/workflows/build-and-push-images.yml/badge.svg)](https://github.com/x3s-host/x3s/actions/workflows/build-and-push-images.yml)
+[![React Doctor Score](https://img.shields.io/badge/React%20Doctor-92%2F100-great?style=flat-square&color=2ea043)](https://github.com/x3s-host/.github/blob/main/profile/README.md#react-doctor-score-x3s-hostx3s)
 
 Sovereign hosting for AI agent runtimes.
 
